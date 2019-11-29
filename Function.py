@@ -1,3 +1,5 @@
+
+
 def show_list(list):
 	string=''
 	for item in list:
@@ -18,11 +20,40 @@ def getMatrix(list1,list2,list3):
 	matrix = [['#','a','b','c'],merge_row(['a'],list1),merge_row(['b'],list2),merge_row(['c'],list3)]
 	return matrix
 
+def GetRowCol(UserValue):
+	temp = str(UserValue)
+	row=0
+	col=0
+	if temp[0]=='a':
+		row=1
+	elif temp[0]=='b':
+		row=2
+	elif temp[0]=='c':
+		row=3
+	if temp[1]=='a':
+		col=1
+	elif temp[1]=='b':
+		col=2
+	elif temp[1]=='c':
+		col=3
+	RowCol=[row,col]
+	return 	RowCol	
+
+def InputUser():
+	GetUserString=input("Please select Row and Col {0}".format('ex.(ab = row#1 and col#2):'))[:2]
+	return GetUserString
+def SelectPattern (userValue):
+	import re
+	pattern=re.search('[a-c]{2}',userValue)
+	return pattern
+
 def GetUserValue():
-	userInput= input('Run Player X: ')
-	while len(userInput)!=2:
-		print('Wrong Value: Please enter valid value.')
-		userInput= input('Run Player X: ')
+	userValue = InputUser()
+	pattern = SelectPattern(userValue)
+	while pattern==None:
+		print('Wrong input data: {0} pattern is: {1}'.format(userValue,pattern))
+		userValue = InputUser()
+		pattern = SelectPattern(userValue)
 	else:
-		print('User set: {0}'.format(userInput))
-	
+		print('User select: {0}'.format(userValue))
+	return userValue
