@@ -9,27 +9,32 @@ PlayerOValue=[]
 Player='X'
 Count=9
 
-while F.Hods(PlayerXValue,PlayerOValue)<Count:
-	print('Make: {0} pass'.format(F.CountHods(PlayerXValue,PlayerOValue)))
-	print('Player {0}:'.format(Player))
+while F.CountHods(PlayerXValue,PlayerOValue)<Count:
+	if F.Wins(PlayerXValue):
+		print ('Player X wins: ')
+		break
+	if F.Wins(PlayerOValue):
+		print ('Player O wins ')
+		break
+		
+	print('{0}>>>>'.format(F.CountHods(PlayerXValue,PlayerOValue)))
+	print('Player {0} input value:'.format(Player))
 	
 	userInput = F.GetUserValue()
-	##input logika in caz ca deja asa hod sa facut
-	if F.ifExist_UserValue(PlayerXValue,userInput):
-		print('Value exist please select another value')
+	#F.display_state_screen(matrix)
+	
+	if F.SameHodsExist(PlayerXValue,PlayerOValue,userInput):
+		print('Value {0} exist in player {1}'.format(userInput, Player))
 	else:
-		print('No exist:Append value {0} in depositValue'.format(userInput))
+		#print('Value {0} no exist in {1}'.format(userInput, 'Players'))
 		if Player=='X':
+			print('add x value')
 			PlayerXValue.append(userInput)
-			print('Show value of Player{1}Value: {0}'.format(PlayerXValue,Player))
 		else:
+			print('add o value')
 			PlayerOValue.append(userInput)
-			print('Show value of Player{1}Value: {0}'.format(PlayerOValue,Player))
-	matrix=F.ModifyMatrix(matrix,userInput,Player)
-	F.display_state_screen(matrix)
-	Player=F.NextPlayer(Player)
-	
-	
-	
-
+			
+		F.ModifyMatrix(matrix,userInput,Player)
+		F.display_state_screen(matrix)
+		Player=F.NextPlayer(Player)
 input("press enter to exit...")

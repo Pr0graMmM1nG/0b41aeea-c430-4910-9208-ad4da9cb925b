@@ -16,7 +16,7 @@ def show_list(list):
 	print(string,end='')
 
 def display_state_screen(matrix_state):
-	print('Games State:')
+	print('_______________')
 	for i in matrix_state:
 		show_list(i)
 		print('\n')
@@ -45,8 +45,7 @@ def GetRowCol(UserValue):
 	return 	RowCol	
 
 def InputUser():
-
-	GetUserString=input("Please select Row and Col {0}".format('ex.(ab = row#1 and col#2):'))[:2]
+	GetUserString=input("ex.(ab = row#1 and col#2):")[:2]
 	return GetUserString
 	
 def SelectPattern (userValue):
@@ -58,7 +57,7 @@ def GetUserValue():
 	userValue = InputUser()
 	pattern = SelectPattern(userValue)
 	while pattern==None:
-		print('Wrong input data: {0} pattern is: {1}'.format(userValue,pattern))
+		print('Error input: {0}, Please type again:'.format(userValue))
 		userValue = InputUser()
 		pattern = SelectPattern(userValue)
 	else:
@@ -76,13 +75,13 @@ def ifExist_UserValue(AllValue, CurrentValue):
 		if item==CurrentValue:
 			countValue+=1
 	if countValue==0:
-		return bool(0)
+		return False
 	else:
-		return bool(1)
+		return True
 def StartGames():
 	print('Begin game: Loading...')
 	
-def CountHods(PlayerX,PlayerO): #Ceva ne to calculeaza
+def CountHods(PlayerX,PlayerO):
 	x=len(PlayerX)
 	y=len(PlayerO)
 	return x+y
@@ -93,5 +92,32 @@ def NextPlayer(Player):
 	else:
 		Player='X'
 	return Player
+
+def Wins(PlayerHods):
+	PlayerCase= set(PlayerHods)
+	a=['aa','ab','ac']
+	b=['ba','bb','bc']
+	c=['ca','cb','cc']
+	d=['aa','ba','ca']
+	e=['ba','bb','bc']
+	f=['ca','cb','cc']
+	g=['aa','bb','cc']
+	h=['ac','bb','ca']
+	WinConditionArray= [a,b,c,d,e,f,g,h]
+	for Wincase in WinConditionArray:
+		item =  set(Wincase)
+		if len(PlayerCase & item)==3:
+			return True
+
+def SameHodsExist (PlayerXhods,PlayerOhods,currentInput):
+	flag = 0
+	PlayerXhods.extend(PlayerOhods)
+	flag=PlayerXhods.count(currentInput)
+	if any(check in PlayerXhods for check in PlayerOhods) or len(PlayerXhods)!=len(set(PlayerXhods)) or len(PlayerOhods)!=len(set(PlayerOhods)):
+		flag+=1	
+	if flag>0:
+		return True
+	else:
+		return False
 
 		
