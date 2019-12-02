@@ -99,8 +99,8 @@ def Wins(PlayerHods):
 	b=['ba','bb','bc']
 	c=['ca','cb','cc']
 	d=['aa','ba','ca']
-	e=['ba','bb','bc']
-	f=['ca','cb','cc']
+	e=['ab','bb','cb']
+	f=['ac','bc','cc']
 	g=['aa','bb','cc']
 	h=['ac','bb','ca']
 	WinConditionArray= [a,b,c,d,e,f,g,h]
@@ -111,10 +111,8 @@ def Wins(PlayerHods):
 
 def SameHodsExist (PlayerXhods,PlayerOhods,currentInput):
 	flag = 0
-	PlayerXhods.extend(PlayerOhods)
-	flag=PlayerXhods.count(currentInput)
-	if any(check in PlayerXhods for check in PlayerOhods) or len(PlayerXhods)!=len(set(PlayerXhods)) or len(PlayerOhods)!=len(set(PlayerOhods)):
-		flag+=1	
+	flag+=PlayerXhods.count(currentInput)
+	flag+=PlayerOhods.count(currentInput)
 	if flag>0:
 		return True
 	else:
